@@ -2,23 +2,20 @@
   <header>
     <a href="/">
       <div class="logo">
-        <p>Manolyx</p>
-        <div><img src="/logo.jpg" alt="logo" /></div>
+        <p>Uploader</p>
+        <div><img src="/logo.svg" alt="logo" /></div>
       </div>
     </a>
     <nav>
-      <div>
-        <a href="/">Home</a>
-      </div>
-
-      <% if (locals.user) { %>
-      <a href="/posts/create">New post</a>
-      <% } %>
-      <% if (locals.user && !locals.user.membership_status) { %>
-      <a href="/users/join" class="join-link">Join Club</a>
-      <% } %>
+      <a href="/">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <title>home</title>
+          <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+        </svg>
+        Home
+      </a>
       <% if (!locals.user) { %>
-      <a href="/users/login" class="login-link">
+      <a href="/auth/sign-in" class="login-link">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <title>login</title>
           <path
@@ -29,6 +26,15 @@
       </a>
       <% } %>
       <% if (locals.user) { %>
+      <a href="/auth/logout" class="logout-link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <title>logout</title>
+          <path
+            d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12M4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z"
+          />
+        </svg>
+        Logout
+      </a>
       <div class="user-infos">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -41,23 +47,8 @@
           />
         </svg>
         <p class="username"><%= user.firstname %></p>
-        <% if (user.membership_status === true) { %>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <title>members icon</title>
-          <path
-            d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"
-          />
-        </svg>
-        <% } %>
-        <% if (user.admin === true) { %>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <title>Club admin icon</title>
-          <path
-            d="M12,12H19C18.47,16.11 15.72,19.78 12,20.92V12H5V6.3L12,3.19M12,1L3,5V11C3,16.55 6.84,21.73 12,23C17.16,21.73 21,16.55 21,11V5L12,1Z"
-          />
-        </svg>
-        <% } %>
       </div>
+
       <% } %>
     </nav>
   </header>
