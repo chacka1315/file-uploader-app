@@ -4,11 +4,16 @@ import session from 'express-session';
 import passport from 'passport';
 import path from 'node:path';
 import morgan from 'morgan';
-import NotFoundError from './errors/NotFoundError.js';
 import configurePassport from './config/passport.js';
 import prisma from './prisma/client.js';
 import { PrismaSessionStore } from '@quixo3/prisma-session-store';
 import { fileURLToPath } from 'node:url';
+import { NotFoundError } from './errors/CustomErrors.js';
+import indexRouter from './routes/indexRouter.js';
+import authRouter from './routes/authRouter.js';
+import uploadRouter from './routes/uploadRouter.js';
+import folderRouter from './routes/folderRouter.js';
+import fileRouter from './routes/fileRouter.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,7 +29,12 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 //global middlewares
-app.use(morgan('dev'));
+morgan('combined', {
+  skip: (req, res) => {
+    return res.statusCode < 400;
+  },
+});
+
 app.use(express.static(assetsPath));
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -41,21 +51,27 @@ app.use(
 configurePassport(passport);
 app.use(passport.session());
 app.use((req, res, next) => {
-  if (req.user) res.locals.user = req.user;
+  if (req.user) {
+    res.locals.user = req.user;
+    // console.log('USER : ', req.user);
+  }
   next();
 });
 
-app.get('/', (req, res) => {
-  res.send('Hello world');
-});
+//routing
+app.use('/', indexRouter);
+app.use('/auth', authRouter);
+app.use('/upload', uploadRouter);
+app.use('/folder', folderRouter);
+app.use('/file', fileRouter);
 
 //errors handling
-app.use((req, res) => {
-  throw new NotFoundError('Page not found!');
+app.use((req, resm, next) => {
+  next(new NotFoundError('Page not found!'));
 });
 
 app.use((err, req, res, next) => {
-  console.log(err);
+  console.error(err);
   res.status(err.statusCode || 500).render('pages/404');
 });
 
