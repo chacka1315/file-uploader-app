@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/styles/sign-in.css" />
+  </head>
+  <body>
+    <header><a href="/" class="home-link">Uploader</a></header>
+    <main>
+      <div class="login-form">
+        <div class="formHead">
+          <h1>Sign in</h1>
+          <div>
+            <p>Get access for more...</p>
+            <p>Don't have an account? <a href="/auth/sign-up">Register</a></p>
+          </div>
+        </div>
+        <form action="/auth/sign-in" method="post">
+          <section>
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="username"
+              type="email"
+              value="<%= formData.username %>"
+              required
+              autofocus
+            />
+          </section>
+          <section>
+            <label for="password">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              value="<%= formData.password %>"
+              required
+            />
+            <button class="togglePwdView" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <title>Show password</title>
+                <path
+                  d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+                />
+              </svg>
+            </button>
+          </section>
+          <% if (locals.message) { %>
+          <p class="errors"><%= message %></p>
+          <% } %>
+          <%- include('../partials/errors') %>
+          <button type="submit">Sign in</button>
+          <a href="/">Back to home</a>
+        </form>
+      </div>
+    </main>
+    <script>
+      const button = document.querySelector('.togglePwdView');
+      const password = document.getElementById('password');
+      button.addEventListener('click', () => {
+        password.type = password.type === 'password' ? 'text' : 'password';
+      });
+    </script>
+  </body>
+</html>
