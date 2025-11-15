@@ -7,6 +7,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique @db.VarChar(255)
+  password  String
+  firstname String   @db.VarChar(255)
+  lastname  String   @db.VarChar(255)
+  folders   Folder[]
+}
+
+model Folder {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  owner     User     @relation(fields: [ownerId], references: [id])
+  ownerId   Int
+  files     File[]
+
+  @@unique([ownerId, name])
+}
+
+model File {
+  id                 Int      @id @default(autoincrement())
+  name               String   @db.VarChar(255)
+  downloadName       String   @db.VarChar(255)
+  size               Int
+  uploadedAt         DateTime @default(now())
+  url                String
+  cloudinaryPublicId String
+  mimetype           String
+  folder             Folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
+  folderId           Int
+
+  @@unique([folderId, name])
+}
+
 model Session {
   id        String   @id
   sid       String   @unique
