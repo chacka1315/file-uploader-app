@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/styles/folderContent.css" />
+  </head>
+  <body>
+    <%- include('../partials/header') %>
+    <main>
+      <div class="container">
+        <%- include('../partials/sidebar') %>
+        <div class="content">
+          <div class="folder-infos">
+            <p class="folder-name">
+              <%= folder.name %>
+              <span>
+                <%= folder.files.length %>
+                file(s)
+              </span>
+            </p>
+            <div class="folder-actions">
+              <a href="/folder/<%= folder.id %>/update">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <title>form-textbox</title>
+                  <path
+                    d="M17,7H22V17H17V19A1,1 0 0,0 18,20H20V22H17.5C16.95,22 16,21.55 16,21C16,21.55 15.05,22 14.5,22H12V20H14A1,1 0 0,0 15,19V5A1,1 0 0,0 14,4H12V2H14.5C15.05,2 16,2.45 16,3C16,2.45 16.95,2 17.5,2H20V4H18A1,1 0 0,0 17,5V7M2,7H13V9H4V15H13V17H2V7M20,15V9H17V15H20Z"
+                  />
+                </svg>
+                Rename
+              </a>
+              <a href="/upload/<%= folder.id %>">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <title>upload</title>
+                  <path d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" />
+                </svg>
+                Upload
+              </a>
+              <form action="/folder/<%= folder.id %>/delete" method="post">
+                <button
+                  type="submit"
+                  onclick="return confirm('Delete this folder with all content?')"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <title>delete</title>
+                    <path
+                      d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                    />
+                  </svg>
+                  Delete
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <% if (folder.files.length > 0) { %>
+          <div class="folder-content">
+            <div>
+              <p>Name</p>
+              <p>Size</p>
+              <p>Upload date</p>
+              <p></p>
+            </div>
+            <hr />
+            <% folder.files.forEach(file => { %>
+            <div class="file-card">
+              <p class="name">
+                <img
+                  src="/files_icons/<%= file.mimetype.split('/')[0] %>.svg"
+                  alt=""
+                />
+                <%= file.name %>
+              </p>
+              <p><%= file.size %> Mb</p>
+              <p><%= file.uploadedAt %></p>
+              <div class="file-actions">
+                <a href="/file/<%= file.id %>/download">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <title>download</title>
+                    <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+                  </svg>
+                </a>
+                <form action="/file/<%= file.id %>/delete" method="post">
+                  <button type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <title>delete</title>
+                      <path
+                        d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                      />
+                    </svg>
+                  </button>
+                </form>
+              </div>
+            </div>
+            <hr />
+            <% }) %>
+          </div>
+        </div>
+        <% } %>
+
+        <% if (folder.files.length === 0) { %>
+        <div class="empty-folder">
+          <div><img src="/empty_folder.png" alt="" /></div>
+          <p>Upload your files here...</p>
+        </div>
+        <%}%>
+      </div>
+    </main>
+    <%- include('../partials/footer') %>
+  </body>
+</html>

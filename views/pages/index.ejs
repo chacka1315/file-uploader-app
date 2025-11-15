@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/styles/index.css" />
+  </head>
+  <body>
+    <%- include('../partials/header') %>
+    <main>
+      <div class="container">
+        <%- include('../partials/sidebar') %>
+        <div class="content">
+          <% if (locals.user) { %>
+          <p class="greeting">
+            Welcome to Uploader <span><%= user.firstname %></span> !
+          </p>
+          <% } else {%>
+          <p class="greeting">Welcome to Uploader...</p>
+          <p>
+            <a href="/auth/sign-in">Sign-in</a> or
+            <a href="/auth/sign-up">Create an account</a> and starts uploading
+            your files.
+          </p>
+          <%} %>
+          <img src="/logo.svg" alt="logo" />
+        </div>
+      </div>
+    </main>
+    <%- include('../partials/footer') %>
+  </body>
+</html>

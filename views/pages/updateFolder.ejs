@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/styles/folderForm.css" />
+  </head>
+  <body>
+    <%- include('../partials/header') %>
+    <main>
+      <div class="container">
+        <%- include('../partials/sidebar') %>
+        <div class="form-content">
+          <div class="upload-form">
+            <form action="/folder/<%= folder.id %>/update" method="post">
+              <h1>Rename this folder</h1>
+              <input
+                type="text"
+                name="folder_name"
+                id="folder_name"
+                placeholder="Folder name"
+                value="<%= folder.name %>"
+              />
+              <%- include('../partials/errors') %>
+              <button type="submit">Rename</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <%- include('../partials/footer') %>
+  </body>
+</html>

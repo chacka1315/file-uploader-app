@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/styles/uploadForm.css" />
+  </head>
+  <body>
+    <%- include('../partials/header') %>
+    <main>
+      <div class="container">
+        <%- include('../partials/sidebar') %>
+        <div class="form-content">
+          <div class="upload-form">
+            <form
+              action="/upload/<%= folderId %>"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <h1>Uploade your files.</h1>
+              <label for="files"> max : 10 Mb/file | 5 files/upload </label>
+              <% if (locals.success_upload_msg) { %>
+              <p class="success-upload-msg">✅ <%= success_upload_msg %></p>
+              <% } %>
+              <% if (locals.failed_upload_msg) { %>
+              <p class="failed-upload-msg">❌ <%= failed_upload_msg %></p>
+              <% } %>
+              <input
+                type="file"
+                name="files"
+                id="files"
+                multiple
+                placeholder="max : 50 Mb per file."
+              />
+              <button type="submit">Upload</button>
+              <a href="/folder/<%= folderId %>/view">Exit</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <%- include('../partials/footer') %>
+  </body>
+</html>
