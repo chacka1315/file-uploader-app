@@ -1,0 +1,27 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content .greeting {
+  font-weight: 200;
+  font-size: 2.5rem;
+}
+.content .greeting span {
+  font-weight: 900;
+}
+.content img {
+  max-width: 300px;
+  height: auto;
+}
+
+.greeting + p a {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.greeting + p a:hover {
+  text-decoration: underline;
+}

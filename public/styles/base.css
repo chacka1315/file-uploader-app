@@ -65,8 +65,233 @@ h6 {
 
 /* variables */
 :root {
+  --primary-color: #25b6d2;
+  --secondary-color: #fff;
+  --third-color: rgb(43, 40, 40);
+  --forth-color: #f1f1f2;
+  --input-bkg-color: #fafafa;
+  --font-family: 'Outfit';
+  --shadow-on-white: rgba(0, 0, 0, 0.3) 0px 2px 4px 0px;
 }
 
 /* layout and general styles */
 body {
+  font-family: var(--font-family);
+  background-color: var(--forth-color);
+  display: grid;
+  grid-template-rows: 60px 1fr 90px;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  height: 100%;
+  width: 100%;
+}
+
+.content {
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  padding: 10px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+main {
+  padding-right: 30px;
+  padding-left: 30px;
+  min-height: calc(100vh - 150px);
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* header styles */
+.header {
+  position: sticky;
+  top: 0;
+  background: #f5f5f5;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  gap: 5px;
+}
+
+header .logo div {
+  max-width: 40px;
+  min-width: 25px;
+}
+
+header .logo p {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  font-weight: 900;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+nav div {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  color: var(--third-color);
+  font-size: 1rem;
+  border-bottom: 5px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav > a svg {
+  width: 20px;
+  height: 20px;
+}
+
+nav a:hover {
+  border-bottom-color: var(--primary-color);
+}
+
+nav .logout-link,
+nav .login-link {
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  padding: 8px 7px;
+  border-radius: 7px;
+  font-size: 15px;
+  border: none;
+}
+
+nav .logout-link:hover,
+nav .login-link:hover {
+  filter: brightness(0.9);
+}
+
+nav .login-link svg,
+nav .logout-link svg {
+  fill: var(--secondary-color);
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+}
+
+header .user-infos {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  font-weight: 700;
+}
+
+header .user-infos .user-profile-img {
+  width: 30px;
+  height: 30px;
+  fill: var(--secondary);
+}
+
+/* sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.sidebar > a {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  gap: 2px;
+  padding: 10px 5px;
+  margin: 10px 0;
+  border-radius: 7px;
+}
+
+.sidebar > a:hover {
+  filter: brightness(0.9);
+}
+.sidebar > a svg {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  fill: var(--secondary-color);
+}
+.folders-list svg {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+}
+
+.folders-list .folder-card a:hover {
+  background-color: rgb(0, 0, 0, 0.1);
+}
+
+.folders-list .folder-card a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: black;
+  font-size: 18px;
+  border-radius: 15px;
+  padding: 5px 5px;
+  margin-right: 5px;
+}
+
+/* footer styles */
+footer > div {
+  padding: 10px 60px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  font-size: 14px;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+footer a {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.errors {
+  color: red;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
 }

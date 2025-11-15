@@ -1,0 +1,110 @@
+.home-link {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--primary-color);
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+  grid-row: 1/-1;
+}
+
+.signup-form {
+  background-color: var(--secondary-color);
+  width: 450px;
+  margin: 10px 0;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+  height: fit-content;
+}
+
+form {
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.formHead {
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formHead > h1 {
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.formHead p {
+  color: gray;
+  margin-top: 20px;
+}
+
+.formHead p a {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+.formHead p a:hover {
+  text-decoration: underline;
+}
+section {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+section input {
+  height: 40px;
+  background-color: var(--input-bkg-color);
+  outline: none;
+  border: 1px solid var(--forth-color);
+  border-radius: 4px;
+  padding: 0 10px;
+}
+
+form > button {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  padding: 8px 0;
+  border-radius: 5px;
+}
+
+form > button:hover {
+  filter: brightness(0.9);
+}
+
+.togglePwdView svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--primary-color);
+}
+
+.togglePwdView {
+  background: none;
+  border: none;
+  width: fit-content;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+form a {
+  color: var(--primary-color);
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+}
+
+form a:hover {
+  text-decoration: underline;
+}
