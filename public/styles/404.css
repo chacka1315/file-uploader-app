@@ -65,11 +65,13 @@ h6 {
 
 /* general styles */
 body {
+  font-family: 'Outfit', Helvetica, 'system-ui', sans-serif;
   background-color: rgb(43, 40, 40);
   color: #fff;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  font-size: 20px;
 }
 
 main {
