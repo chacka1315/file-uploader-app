@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "db:dev": "prisma migrate dev",
-    "db:deploy": "prisma deploy",
+    "db:deploy": "prisma migrate deploy",
     "db:client": "prisma generate"
   },
   "engines": {
