@@ -86,3 +86,26 @@ main {
 main a {
   color: inherit;
 }
+
+a svg {
+  width: 20px;
+  height: 20px;
+  fill: #25b6d2;
+}
+
+.share-link {
+  color: #25b6d2;
+}
+
+.share-link + a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #25b6d2;
+  margin-bottom: 50px;
+  text-decoration: none;
+}
+
+.share-link + a:hover {
+  text-decoration: underline;
+}

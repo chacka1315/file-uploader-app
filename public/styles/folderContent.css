@@ -58,8 +58,6 @@
   justify-content: center;
   gap: 15px;
 }
-.folder-infos {
-}
 
 .folder-content {
   padding: 15px;
@@ -72,7 +70,7 @@
 
 .file-card {
   width: 100%;
-  padding: 5px 0;
+  padding: 10px 0;
 }
 
 .folder-content > div {

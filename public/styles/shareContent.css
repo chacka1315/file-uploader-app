@@ -1,0 +1,132 @@
+.share-content {
+  display: grid;
+  grid-template-rows: 60px 1fr;
+  padding: 0;
+  width: 100%;
+}
+
+main {
+  padding: 0;
+  overflow: auto;
+  background-color: var(--secondary-color);
+}
+
+.folder-infos {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  padding: 10px 15px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  display: flex;
+  width: 100%;
+}
+
+.folder-name {
+  font-weight: 700;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.folder-name span {
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.folder-content {
+  padding: 15px;
+  width: 100%;
+}
+
+.folder-content > div {
+  display: flex;
+}
+
+.file-card {
+  width: 100%;
+  padding: 10px 0;
+}
+
+.folder-content > div {
+  display: grid;
+  grid-template-columns: 1fr repeat(2, 120px) 100px;
+}
+
+.folder-content > div:first-child {
+  font-weight: 300;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.file-card .name {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.file-card .name img {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+}
+
+.file-actions {
+  display: flex;
+  gap: 15px;
+  height: 100%;
+  align-items: center;
+}
+
+.file-actions svg {
+  width: 25px;
+  height: 25px;
+}
+
+.file-actions a {
+  background-color: var(--secondary-color);
+  width: fit-content;
+  border: none;
+  height: 100%;
+}
+
+.file-actions a svg {
+  fill: green;
+}
+
+.file-actions a:hover {
+  filter: brightness(0.9);
+}
+
+.owner-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.owner-name svg {
+  width: 30px;
+  height: 30px;
+  fill: var(--secondary-color);
+}
+
+.empty-folder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-folder img {
+  width: 300px;
+  height: auto;
+}
+
+.empty-folder p {
+  font-size: 2rem;
+  font-weight: 600;
+}

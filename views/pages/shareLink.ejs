@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" type="image/svg" href="/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="/styles/404.css" />
+  <title>Share | Uploader</title>
+  <body>
+    <main>
+      <h1>
+        <%= share.folder.name %>
+        content Share link
+      </h1>
+      <p class="share-link"><%= baseUrl %>/share/<%= share.shareId %></p>
+      <a href="<%= baseUrl %>/share/<%= share.shareId %> " target="_blank">
+        Open
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <title>open-in-new</title>
+          <path
+            d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"
+          />
+        </svg>
+      </a>
+      <a href="/">Head back home🪂</a>
+    </main>
+  </body>
+</html>
