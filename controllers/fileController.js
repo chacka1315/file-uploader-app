@@ -1,6 +1,5 @@
 import prisma from '../prisma/client.js';
 import { NotFoundError, BadRequestError } from '../errors/CustomErrors.js';
-import path from 'node:path';
 import cloudinary from '../config/cloudinary.js';
 import { pipeline } from 'node:stream';
 import { promisify } from 'node:util';
@@ -34,13 +33,25 @@ const file_delete_post = async (req, res, next) => {
 const file_download_get = async (req, res, next) => {
   let { id } = req.params;
   id = Number(id);
+
   try {
     const file = await prisma.file.findUnique({
       where: {
         id,
-        folder: {
-          ownerId: req.user.id,
-        },
+        OR: [
+          {
+            folder: {
+              ownerId: req.user?.id,
+            },
+          },
+          {
+            folder: {
+              share: {
+                isNot: null,
+              },
+            },
+          },
+        ],
       },
       select: { url: true, downloadName: true },
     });

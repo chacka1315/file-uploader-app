@@ -57,6 +57,7 @@ const folder_view_get = async (req, res, next) => {
       },
       include: {
         files: true,
+        share: true,
       },
     });
 
@@ -96,7 +97,7 @@ const folder_update_get = async (req, res, next) => {
     });
 
     if (!folder) {
-      throw new NotFoundError('Try to update file wich does not exist!');
+      throw new NotFoundError('Try to update folder wich does not exist!');
     }
     res.render('pages/updateFolder', {
       folder,
