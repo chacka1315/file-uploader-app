@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/styles/folderForm.css" />
+  </head>
+  <body>
+    <%- include('../partials/header') %>
+    <main>
+      <div class="container">
+        <%- include('../partials/sidebar') %>
+        <div class="form-content">
+          <div class="share-form">
+            <form action="/share/create/<%= folderId %>" method="post">
+              <h1>Share content with friends.</h1>
+              <label for="share_duration">
+                Enter the share duration (In days)
+              </label>
+              <input
+                type="text"
+                name="share_duration"
+                id="share_duration"
+                placeholder="Ex : 15"
+                value="<%= formData.share_duration %>"
+              />
+              <%- include('../partials/errors') %>
+              <button type="submit">Share folder content</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <%- include('../partials/footer') %>
+  </body>
+</html>

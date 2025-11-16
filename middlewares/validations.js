@@ -77,4 +77,8 @@ const folder = body('folder_name')
   .withMessage('Invalid symbols in the folder name.')
   .custom(folderNameExists);
 
-export default { signup, signin, folder };
+const share = body('share_duration')
+  .trim()
+  .isInt({ min: 1, max: 400 })
+  .withMessage('Share duration must be an integer between 1 and 400 (days).');
+export default { signup, signin, folder, share };
