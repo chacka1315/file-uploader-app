@@ -14,6 +14,7 @@ import authRouter from './routes/authRouter.js';
 import uploadRouter from './routes/uploadRouter.js';
 import folderRouter from './routes/folderRouter.js';
 import fileRouter from './routes/fileRouter.js';
+import shareRouter from './routes/shareRouter.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -53,7 +54,6 @@ app.use(passport.session());
 app.use((req, res, next) => {
   if (req.user) {
     res.locals.user = req.user;
-    // console.log('USER : ', req.user);
   }
   next();
 });
@@ -64,6 +64,7 @@ app.use('/auth', authRouter);
 app.use('/upload', uploadRouter);
 app.use('/folder', folderRouter);
 app.use('/file', fileRouter);
+app.use('/share', shareRouter);
 
 //errors handling
 app.use((req, resm, next) => {
