@@ -1,10 +1,12 @@
 {
-  "name": "backend_template",
+  "name": "file_uploader",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "db:dev": "prisma migrate dev",
+    "db:deploy": "prisma deploy",
+    "db:client": "prisma generate"
   },
   "engines": {
     "node": "22.17.0"
