@@ -11,7 +11,7 @@ The File Uploader app allows users to:
 - Share folders via generated links
 The application uses **Prisma ORM** for interacting with the database and **Multer** for parsing file uploads. 
 
-## 🎨 Live preview
+## 🎨 Live preview  ( Non-reponsive)
 The server will take a few second to start as it'is deployed on free plan (Le serveur prendra un peu de temps pour demarer car l'app est deploye sur un plan gratuit de Render).
 [See the apllication (Voir l'application)](https://file-uploader-9dnb.onrender.com/)
 
