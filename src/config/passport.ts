@@ -1,8 +1,9 @@
 import prisma from '../prisma/client.js';
 import { Strategy as LocalStrategy } from 'passport-local';
 import bcrypt from 'bcryptjs';
+import type { PassportStatic } from 'passport';
 
-function configurePassport(passport) {
+function configurePassport(passport: PassportStatic) {
   passport.use(
     new LocalStrategy(async (username, password, done) => {
       try {
@@ -34,7 +35,7 @@ function configurePassport(passport) {
     return done(null, user.id);
   });
 
-  passport.deserializeUser(async (id, done) => {
+  passport.deserializeUser(async (id: number, done) => {
     try {
       const user = await prisma.user.findUnique({
         where: {

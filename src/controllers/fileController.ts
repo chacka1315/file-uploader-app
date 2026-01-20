@@ -3,18 +3,24 @@ import { NotFoundError, BadRequestError } from '../errors/CustomErrors.js';
 import cloudinary from '../config/cloudinary.js';
 import { pipeline } from 'node:stream';
 import { promisify } from 'node:util';
+import type { RequestHandler } from 'express';
+
 const pipelineAsync = promisify(pipeline);
 
-const file_delete_post = async (req, res, next) => {
+const file_delete_post: RequestHandler = async (req, res, next) => {
   let { id } = req.params;
-  id = Number(id);
+  let fileId: number;
+  if (typeof id !== 'string') {
+    fileId = Number(id[0]);
+  }
+  fileId = Number(id);
 
   try {
     const deleted = await prisma.file.delete({
       where: {
-        id,
+        id: fileId,
         folder: {
-          ownerId: req.user.id,
+          ownerId: req.user?.id,
         },
       },
       select: { folderId: true, cloudinaryPublicId: true },
@@ -23,21 +29,25 @@ const file_delete_post = async (req, res, next) => {
     await cloudinary.uploader.destroy(deleted.cloudinaryPublicId);
     res.redirect(`/folder/${deleted.folderId}/view`);
   } catch (err) {
-    if (err.code === 'P2025') {
+    if (err instanceof Error && 'code' in err && err.code === 'P2025') {
       return next(new NotFoundError('Unauthorized to delete this file.'));
     }
     next(err);
   }
 };
 
-const file_download_get = async (req, res, next) => {
+const file_download_get: RequestHandler = async (req, res, next) => {
   let { id } = req.params;
-  id = Number(id);
+  let fileId: number;
+  if (typeof id !== 'string') {
+    fileId = Number(id[0]);
+  }
+  fileId = Number(id);
 
   try {
     const file = await prisma.file.findUnique({
       where: {
-        id,
+        id: fileId,
         OR: [
           {
             folder: {
@@ -74,9 +84,11 @@ const file_download_get = async (req, res, next) => {
       `attachment; filename*=UTF-8''${name}`,
     );
     res.setHeader('Accept-Ranges', 'bytes');
-    res.setHeader('Content-Length', response.headers.get('content-length'));
+    res.setHeader('Content-Length', response.headers.get('content-length')!);
 
-    await pipelineAsync(response.body, res);
+    if (response.body) {
+      await pipelineAsync(response.body, res);
+    }
   } catch (err) {
     next(err);
   }

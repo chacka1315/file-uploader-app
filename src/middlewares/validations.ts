@@ -1,19 +1,24 @@
 import { body } from 'express-validator';
 import prisma from '../prisma/client.js';
+import type { CustomValidator } from 'express-validator';
+import type { Folder } from '@prisma/client';
 
 const emailErr = 'This email address is not valid.';
 const nameLengthErr = 'must be between  2 and 50 characters.';
 const alphaErr = 'must only contain letters.';
 const strongPasswordErr = `must contain at least one capital letter, one lowercase letter, and one number.`;
 
-const confirmationPasswordMatchPassword = (value, { req }) => {
+const confirmationPasswordMatchPassword: CustomValidator = (
+  value: string,
+  { req },
+) => {
   if (value !== req.body.password) {
     throw new Error('Confirmation password does not match the password.');
   }
   return true;
 };
 
-const emailNotInUse = async (value) => {
+const emailNotInUse = async (value: string) => {
   const user = await prisma.user.findUnique({
     where: {
       username: value,
@@ -59,8 +64,10 @@ const signin = [
   body('password').trim().notEmpty().withMessage('Password must not be empty.'),
 ];
 
-const folderNameExists = (name, { req }) => {
-  const exists = req.user.folders.some((folder) => folder.name === name);
+const folderNameExists: CustomValidator = (name, { req }) => {
+  const exists = req.user.folders.some(
+    (folder: Folder) => folder.name === name,
+  );
   if (exists) {
     throw new Error(
       'A folder already exists with same name, choose another one.',

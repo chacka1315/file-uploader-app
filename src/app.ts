@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import type { ErrorRequestHandler } from 'express';
 import session from 'express-session';
 import passport from 'passport';
 import path from 'node:path';
@@ -43,7 +44,7 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
     },
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET!,
     resave: false,
     saveUninitialized: false,
     store: sessionStore,
@@ -67,14 +68,16 @@ app.use('/file', fileRouter);
 app.use('/share', shareRouter);
 
 //errors handling
-app.use((req, resm, next) => {
+app.use((req, res, next) => {
   next(new NotFoundError('Page not found!'));
 });
 
-app.use((err, req, res, next) => {
+const errHandler: ErrorRequestHandler = (err, req, res, next) => {
   console.error(err);
   res.status(err.statusCode || 500).render('pages/404');
-});
+};
+
+app.use(errHandler);
 
 //start the server
 const PORT = process.env.PORT || 3000;

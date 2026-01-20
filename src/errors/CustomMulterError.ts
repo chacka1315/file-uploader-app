@@ -1,5 +1,5 @@
 class CustomMulterError {
-  #messages = {
+  #messages: Record<string, string> = {
     LIMIT_PART_COUNT: 'Too many parts in the request.',
     LIMIT_FILE_SIZE: 'One or more uploaded file is too large.',
     LIMIT_FILE_COUNT: 'Too many files sent in the one request',
@@ -10,11 +10,12 @@ class CustomMulterError {
     MISSING_FIELD_NAME: 'Field name missing',
   };
 
-  constructor(errCode) {
+  public statusCode = 422;
+  public msg: string;
+  constructor(errCode: string) {
     this.msg =
       this.#messages[errCode] ||
       'Unknown error occurred during file upload, try later.';
-    this.statusCode = 422;
   }
 }
 

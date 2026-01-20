@@ -6,10 +6,12 @@
   "scripts": {
     "db:dev": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
-    "db:client": "prisma generate"
+    "db:client": "prisma generate",
+    "build": "rm -rf dist && tsc && rsync -av src/public src/views dist/",
+    "start": "node dist/app.js"
   },
   "engines": {
-    "node": "22.17.0"
+    "node": "24.12.0"
   },
   "repository": {
     "type": "git",
@@ -25,10 +27,19 @@
   "homepage": "https://github.com/chacka1315/backend_template#readme",
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@types/express": "^5.0.6",
+    "@types/express-session": "^1.18.2",
+    "@types/mime-types": "^3.0.1",
+    "@types/morgan": "^1.9.10",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^25.0.9",
+    "@types/passport": "^1.0.17",
+    "@types/passport-local": "^1.0.38",
     "eslint": "^9.39.1",
     "prettier": "3.6.2",
     "prettier-plugin-ejs": "^1.0.3",
-    "prisma": "^6.19.0"
+    "prisma": "^6.19.0",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "@prisma/client": "^6.19.0",
